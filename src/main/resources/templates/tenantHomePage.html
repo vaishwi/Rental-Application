@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RentBuddy</title>
+    <link  href="../static/css/loginRegister.css"  th:href="@{/css/loginRegister.css}" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<header th:insert ="tenantHeader :: header"></header><br>
+
+<div class="container mt-5">
+    <form th:action="@{/search}" method="post">
+        <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by area" size="50" >
+        <button type="submit" class="btn btn-info" >Search</button>
+    </form></div><br>
+
+<form th:action="@{/filter}" method="post">
+    <select name="property_type" id="property_type" th:value="${property_type}">
+        <option value="Type" name="Type">Type</option>
+        <option value="apartment">Apartment </option>
+        <option value="house">House</option>
+    </select>
+    <select name="rooms" id="rooms"  th:value="${rooms}">
+        <option value="Rooms" name="Rooms">Rooms</option>
+        <option value=1>1BHK </option>
+        <option value=2>2BHK</option>
+        <option value=3>3BHK</option>
+    </select>
+    <select name="price" id="price" th:value="${price}">
+        <option value="Price" name="Price">Price</option>
+        <option value="0-500">0-500$ </option>
+        <option value="501-1000">501-1000$</option>
+        <option value="1001-1500">1001-1500$</option>
+    </select>
+    <select name="location" id="location" th:value="${location}">
+        <option value="location" name="Location">Location</option>
+        <option value="downtown">Downtown</option>
+        <option value="springgarden">springgarden</option>
+    </select>
+    <button type="submit" class="btn btn-info" >ApplyFilter</button>
+
+</form>
+
+<br><br>
+</body>
+</html>

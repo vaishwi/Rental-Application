@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Post an Advertisement</title>
+    <link rel="stylesheet" href="../static/css/loginRegister.css"  th:href="@{/css/loginRegister.css}" type="text/css">
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="/landlordHomePage">Rent Buddy</a>
+    <a href="/landlordHomePage">Home</a>
+    <a href="/landlordInbox">Inbox</a>
+    <div class="topnav-right">
+        <a href="#" th:text=${userId}></a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+<div style="display:flex; align-items: center; justify-content: center;">
+    <form action="#" th:action="@{/advertisementPosting}" method="post" th:object="${advertisement}"
+          enctype="multipart/form-data">
+
+        <table>
+            <tr>
+                <td><h1>Posting advertisement page</h1></td>
+            </tr>
+
+            <tr>
+                <td><h3>Add your posting here</h3></td>
+            </tr>
+            <tr>
+                <td>Property Type</td>
+                <td>
+                    <select required th:field="*{propertyType}">
+                        <option disabled selected th:value> -- select Property Type --</option>
+                        <option th:value="Apartment">Apartment</option>
+                        <option th:value="House">House</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Title</td>
+                <td><input type="text" placeholder="Title" required th:field="*{title}"/></td>
+            </tr>
+            <tr>
+                <td><label>Description</label></td>
+                <td><input type="text" placeholder="Description" required th:field="*{description}"/></td>
+            </tr>
+            <tr>
+                <td><label>No of Bed Rooms</label></td>
+                <td><input type="number" placeholder="Bedrooms" required th:field="*{noOfBedrooms}"></td>
+            </tr>
+            <tr>
+                <td><label>No of Bathrooms</label></td>
+                <td><input type="number" placeholder="Bathrooms" required th:field="*{noOfBathrooms}"></td>
+            </tr>
+            <tr>
+                <td><label>Price</label></td>
+                <td><input type="number" placeholder="Price" required th:field="*{price}"/></td>
+            </tr>
+            <tr>
+                <td><label>Availability</label></td>
+                <td>
+                    <input type="radio" id="weekdays" name="availability" value="weekdays"
+                           th:field="*{landlordAvailability}">
+                    <label for="weekdays">Weekdays</label><br>
+
+                    <input type="radio" id="weekends" name="availability" value="weekend"
+                           th:field="*{landlordAvailability}">
+                    <label for="weekends">Weekends</label><br>
+                </td>
+            <tr>
+
+                <td><label>Availability Timings</label></td>
+
+                <td><label>From</label>
+                    <input type="time" id="from" name="from" required th:field="*{availableFrom}"
+                           onchange='check_timing();'>
+                    <!--                min="09:00" max="20:00"-->
+                    </br>
+                    </br>
+                    <label>To</label>
+                    <input type="time" id="till" name="till" required th:field="*{availableTill}"
+                           onchange='check_timing();'>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td><label>Building Number</label></td>
+                <td><input type="number" placeholder="Building Number" required th:field="*{buildingNumber}"></td>
+            </tr>
+            <tr>
+                <td><label>Street Name</label></td>
+                <td><input type="text" placeholder="Street Name" required th:field="*{streetName}"></td>
+            </tr>
+
+            <tr>
+                <td><label>Location</label></td>
+                <td>
+                    <input type="text" placeholder="Location" required th:field="*{area}">
+                </td>
+            </tr>
+            <tr>
+                <td><label>City</label></td>
+                <td>
+                    <select required th:field="*{cityName}">
+                        <option disabled selected th:value> -- select City --</option>
+                        <option th:value="Halifax">Halifax</option>
+                        <option th:value="Lunenburg">Lunenburg</option>
+                        <option th:value="Truro">Truro</option>
+                        <option th:value="Cap-Breton">Cap-Breton</option>
+                        <option th:value="Kings">Kings</option>
+                    </select>
+                </td>
+            <tr>
+            <tr>
+                <td><label>Country</label></td>
+                <td>
+                    <select required th:field="*{countryName}">
+                        <option disabled selected th:value> -- select Country --</option>
+                        <option th:value="Canada">Canada</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Upload Photos</label></td>
+                <td><input type="file" name="photos" accept="image/*" multiple
+                           th:field="*{photos}"></td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" id="submit">Submit</button>
+                </td>
+            </tr>
+
+        </table>
+        </br>
+    </form>
+</div>
+<script>
+    function check_timing() {
+
+    document.getElementById('submit').disabled = false;
+    if (document.getElementById('from').value < document.getElementById('to').value) {
+    document.getElementById('submit').disabled = false;
+    } else {
+    document.getElementById('submit').disabled = true;
+    }
+    }
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>RentBuddy Login</title>
+  <link  href="../static/css/loginRegister.css"  th:href="@{/css/loginRegister.css}" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<header th:insert ="loginRegisterHeader :: header"></header>
+
+
+<form method="POST" th:action="@{/}" th:object="${user}">
+<div class ="center">
+  <label>Username *</label>
+  <br/>
+  <input type="text" th:field="*{userId}" required>
+  <br/>
+  <br/>
+  <label>Password *</label>
+  <br/>
+  <input type="password" th:field="*{password}" required>
+  <br/>
+  <br/>
+  <button type="submit">Sign In</button>
+  <br/>
+  <a href="/register"><p class="small">Register Here</p></a>
+
+  <a href="/forgotPassword"><p class="small">Forgot password?</p></a>
+</div>
+</form>
+
+<script>
+    var error = "[[${param.error}]]";
+    if(error)
+    {
+      alert(error);
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Email</title>
+    <link  href="../static/css/loginRegister.css"  th:href="@{/css/loginRegister.css}" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+<header th:insert="tenantHeader :: header"></header>
+<form  method="POST" th:action="@{/email}" th:object="${email}">
+
+    <input type="hidden" th:field="${email.emailFrom}">
+    <input type="hidden" th:field="${email.emailTo}">
+
+    <br/>
+    <label>Avaibility</label>
+    <br/>
+    <input type="text" th:field="${email.avaibility}" readonly>
+    <br/>
+
+    <br/>
+    <label>Message *</label>
+    <br/>
+    <input type="text" th:field="*{message}" required>
+    <br/>
+
+    <br/>
+    <button type="text">Email</button>
+    <br/>
+</form>
+
+
+<script>
+    var error = "[[${param.error}]]";
+    if(error)
+    {
+      alert(error);
+    }
+</script>
+
+</body>
+</html>
